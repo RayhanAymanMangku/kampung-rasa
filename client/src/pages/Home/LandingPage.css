@@ -1,0 +1,17 @@
+.lp {
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  /* background-color: hsla(0, 0%, 0%, 0.4);
+  background-blend-mode: overlay; */
+  /* background-color: #fbfbe9; */
+
+  scroll-behavior: smooth;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+ul li {
+  font-family: "Oswald, sans-serif";
+}
