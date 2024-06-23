@@ -50,6 +50,12 @@ Run the Project
 
 Open another terminal in vscode
 
+Navigate to the Server Directory
+
+```bash
+  cd server
+```
+
 Install Dependencies
 
 ```bash
@@ -59,7 +65,7 @@ Install Dependencies
 Run the Server
 
 ```bash
-  nodemon start
+  node server.js
 ```
 
 Don't forget to activate XAMPP on your device
