@@ -32,11 +32,11 @@ export const TakeWayModal = ({ setShowTakeWay }) => {
             action: "add_customer",
         };
 
-        console.log("Sending data:", requestData); // Debugging log
+        console.log("Sending data:", requestData);
 
         axios.post(url, requestData)
             .then((response) => {
-                console.log("Response:", response.data); // Debugging log
+                console.log("Response:", response.data);
 
                 const idCustomerFromResponse = response.data.idCustomer;
                 setIdCustomer(idCustomerFromResponse);

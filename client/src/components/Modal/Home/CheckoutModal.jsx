@@ -1,15 +1,24 @@
 import React from 'react';
 import { IconButton } from '@material-ui/core';
 import QRCode from 'qrcode.react';
+import { useState, useEffect } from 'react';
 
 export const CheckoutModal = ({ setShowCheckout, orderData }) => {
+    const [qrValue, setQrValue] = useState('');
+
+    useEffect(() => {
+        const adminPhoneNumber = '+6281392081108';
+        const message = `Pesanan Baru\n\nID Customer: ${orderData.idCustomer}\nNama Customer: ${orderData.namaCustomer}\nWaktu Pesanan: ${new Date(orderData.waktuPesanan).toLocaleString()}\nTotal Harga: Rp. ${orderData.totalHarga}\nTotal Bayar: Rp. ${orderData.totalHarga + 10000}\n\nDetail Pesanan:\n${orderData.orderDetails.map(detail => `Menu: ${detail.namaMenu}, Quantity: ${detail.quantity}`).join('\n')}`;
+        const whatsappUrl = `https://wa.me/${adminPhoneNumber.replace('+', '')}?text=${encodeURIComponent(message)}`;
+        setQrValue(whatsappUrl);
+    }, [orderData]);
+
     const handleCloseCheckout = () => {
+        window.location.href = '/'
         setShowCheckout(false);
     };
 
-    const handleSendToWhatsapp = () => {
-        // Kirim ke whatsapp
-    };
+
 
     const { waktuPesanan, totalHarga, orderDetails } = orderData;
 
@@ -66,16 +75,16 @@ export const CheckoutModal = ({ setShowCheckout, orderData }) => {
                                 <h4 className='text-lg font-semibold'>Detail Pesanan</h4>
                                 {orderDetails.map((detail, index) => (
                                     <div key={index} className="flex justify-between items-center">
-                                        <p className="text-lg">Menu ID: {detail.idMenu}</p>
+                                        <p className="text-lg">Menu: {detail.namaMenu}</p>
                                         <p className="text-lg">Quantity: {detail.quantity}</p>
                                     </div>
                                 ))}
                             </div>
 
-                            <QRCode value={JSON.stringify(orderData)} />
+                            <QRCode value={qrValue} />
                             <p className='text-gray-600'>Apabila anda sudah selesai melakukan pembayaran, silakan klik tombol selesai maka anda akan diarahkan ke whatsapp untuk mengirim bukti pembayaran.</p>
 
-                            <button onClick={handleSendToWhatsapp} className="bg-blue-500 text-white py-2 rounded-md">Selesai</button>
+                            <button onClick={handleCloseCheckout} className="bg-blue-500 text-white py-2 rounded-md">Selesai</button>
                         </div>
                     </div>
                 </div>

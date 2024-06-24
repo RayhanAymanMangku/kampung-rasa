@@ -13,7 +13,7 @@ export const MenuListModal = ({ idCustomer, namaCustomer, kontakCustomer, setSho
     const [showCheckout, setShowCheckout] = useState(false);
 
     const getOrderDetails = () => {
-        return content.filter(item => item.quantity > 0).map(item => ({ idMenu: item.idMenu, quantity: item.quantity }));
+        return content.filter(item => item.quantity > 0).map(item => ({ idMenu: item.idMenu, quantity: item.quantity, namaMenu: item.namaMenu }));
     };
 
     const getToken = () => {
@@ -156,7 +156,7 @@ export const MenuListModal = ({ idCustomer, namaCustomer, kontakCustomer, setSho
                         <button className='px-3 py-2 bg-green-500 hover:bg-green-600 text-white rounded-sm transition duration-200' onClick={handleCheckout}>Checkout</button>
                     </div>
 
-                    {showCheckout && <CheckoutModal setShowCheckout={setShowCheckout} orderData={{ waktuPesanan: new Date().toISOString(), totalHarga: totalPrice, orderDetails: getOrderDetails(), namaCustomer: namaCustomer, idCustomer: idCustomer }} />}
+                    {showCheckout && <CheckoutModal setShowCheckout={setShowCheckout} orderData={{ waktuPesanan: new Date().toISOString(), totalHarga: totalPrice, orderDetails: getOrderDetails(), namaCustomer: namaCustomer, idCustomer: idCustomer, kontakCustomer: kontakCustomer, }} />}
                 </div>
             </div>
         </div>
